@@ -128,5 +128,8 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-#idea folder
+#Idea folder
 .idea/
+
+# Migration files
+migrations/
