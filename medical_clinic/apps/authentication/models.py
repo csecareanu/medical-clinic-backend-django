@@ -1,12 +1,9 @@
+import uuid
 from django.core.validators import MinLengthValidator
 from django.utils import timezone
 from django.db import models
-from django.contrib.auth.models import (
-    BaseUserManager, AbstractBaseUser
-)
-from .models_choices import (
-    COUNTY_CHOICE, UserTypeChoice
-)
+from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
+from .models_choices import COUNTY_CHOICE, UserTypeChoice
 from .models_validators import phone_no_validator
 
 
@@ -186,3 +183,21 @@ class User(AbstractBaseUser):
     def get_short_name(self):
         """Return the short name for the user."""
         return self.first_name
+
+
+class AuthorizationToken(models.Model):
+    """
+    Token used by user to identify itself when sending an authorization code,
+    in order to be allowed to alter sensitive data.
+    The user can send an Aut
+    """
+    token = models.UUIDField(db_index=True, unique=True, editable=False, default=uuid.uuid4)
+    code = models.CharField(
+        max_length=10,
+        blank=False,
+        help_text='Required. Code used by the user to authorize an operation.'
+    )
+    expiry = models.DateTimeField(blank=False)
+
+    def __str__(self):
+        return str(self.token)

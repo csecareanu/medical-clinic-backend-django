@@ -4,6 +4,7 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 from .models import User
+from .models import AuthorizationToken
 
 
 class UserAdmin(BaseUserAdmin):
@@ -37,11 +38,27 @@ class UserAdmin(BaseUserAdmin):
     )
     search_fields = ('phone_no', 'first_name', 'last_name',)
     ordering = ('last_name',)
+    list_per_page = 100
     filter_horizontal = ()
 
 
-# Now register the new UserAdmin...
+class AuthorizationTokenAdmin(admin.ModelAdmin):
+    fields = ['code', 'expiry']
+    list_display = ['token', 'code', 'expiry']
+    list_filter = []
+    search_fields = ['code']
+    ordering = ('-expiry',)
+    list_per_page = 100
+
+    def has_add_permission(self, request, obj=None):
+        """
+        It could be helpful to modify a code for an existing token, but not add a new token
+        """
+        return False
+
+
+admin.site.register(AuthorizationToken, AuthorizationTokenAdmin)
 admin.site.register(User, UserAdmin)
-# ... and, since we're not using Django's built-in permissions,
-# unregister the Group model from admin.
+
+# Not using Django's built-in permissions. Unregister the Group model from admin.
 admin.site.unregister(Group)
