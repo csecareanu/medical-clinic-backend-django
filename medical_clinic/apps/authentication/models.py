@@ -71,7 +71,6 @@ class UserManager(BaseUserManager):
             password=password
         )
         user.is_superuser = True
-        user.is_staff = True
         user.save(using=self._db)
         return user
 
@@ -131,11 +130,6 @@ class User(AbstractBaseUser):
         'email address',
         blank=True
     )
-    is_staff = models.BooleanField(
-        'staff status',
-        default=False,
-        help_text='Designates whether the user can log into this admin site.'
-    )
     is_active = models.BooleanField(
         'active',
         default=True,
@@ -143,6 +137,14 @@ class User(AbstractBaseUser):
             Unselect this instead of deleting accounts.'
     )
     date_joined = models.DateTimeField('date joined', default=timezone.now)
+
+    @property
+    def is_staff(self):
+        return (
+                self.user_type == UserTypeChoice.ADMIN or
+                self.user_type == UserTypeChoice.DOCTOR or
+                self.user_type == UserTypeChoice.SECRETARY
+        )
 
     objects = UserManager()
 

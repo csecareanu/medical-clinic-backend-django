@@ -13,17 +13,16 @@ class UserAdmin(BaseUserAdmin):
     # that reference specific fields on auth.User.
     list_display = (
         # list_display is used to create the 'Display users / Select user to change' form in Django administration
-        'phone_no', 'user_type', 'first_name', 'last_name', 'date_of_birth', 'is_staff'
+        'phone_no', 'first_name', 'last_name', 'date_of_birth', 'user_type', 'is_active'
     )
     list_filter = (
         # list_filter is used to create filters in 'Display users / Select user to change' form in Django administration
-        'user_type', 'is_staff', 'is_active'
+        'user_type', 'is_active'
     )
     fieldsets = (
         # add_fieldsets is used to create the 'Change user' form in Django administration
         (None, {'fields': ('phone_no', 'password', 'user_type',)}),
         ('Personal info', {'fields': ('first_name', 'last_name', 'date_of_birth', 'county', 'locality', 'email', )}),
-        ('Permissions', {'fields': ('is_staff',)}),
         ('Status', {'fields': ('is_active', )})
     )
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
