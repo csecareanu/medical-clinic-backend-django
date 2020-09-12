@@ -80,8 +80,8 @@ class User(AbstractBaseUser):
     phone_no = models.CharField(
         'phone number',
         max_length=20,
-        db_index=True,
         unique=True,
+        db_index=True,
         help_text='Required.',
         validators=[phone_no_validator],
         error_messages={

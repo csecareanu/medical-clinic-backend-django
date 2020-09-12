@@ -41,8 +41,7 @@ COUNTY_CHOICE = (
     (38	, 'Timiș'),
     (39	, 'Tulcea'),
     (40	, 'Vaslui'),
-    (41	, 'Vâlcea'),
-    (42	, 'Prahova')
+    (41	, 'Vâlcea')
 )
 
 
