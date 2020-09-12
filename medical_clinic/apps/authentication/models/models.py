@@ -3,8 +3,8 @@ from django.core.validators import MinLengthValidator
 from django.utils import timezone
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
-from .models_choices import COUNTY_CHOICE, UserTypeChoice
-from .models_validators import phone_no_validator
+from medical_clinic.apps.authentication.models.choices import COUNTY_CHOICE, UserTypeChoice
+from medical_clinic.apps.authentication.models.validators import phone_no_validator
 
 
 class UserManager(BaseUserManager):

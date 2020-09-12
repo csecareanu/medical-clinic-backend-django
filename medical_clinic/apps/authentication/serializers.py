@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User
+from medical_clinic.apps.authentication.models.models import User
 
 
 class UserSerializer(serializers.ModelSerializer):
