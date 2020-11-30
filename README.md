@@ -13,7 +13,8 @@ pip install Djangorestframework
 python3 manage.py makemigrations authentication
 python3 manage.py migrate
 python3 manage.py createsuperuser
-    User type: 1 (1 = admin)
+    County: any number value between 1 and 41
+    User type: any nubmer value between 1 and 4 (ADMIN = 4 will set automatically)
 mkdir log
 python3 manage.py runserver
 ```
