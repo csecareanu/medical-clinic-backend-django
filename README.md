@@ -17,6 +17,14 @@ python3 manage.py createsuperuser
 mkdir log
 python3 manage.py runserver
 ```
+The admin user created with `python3 manage.py createsuperuser` doesn't have a token associated.\
+To create a token open a web browser:
+- http://127.0.0.1:8000/admin/
+- Tokens
+- ADD TOKEN
+- Choose the admin user from 'User' drop down box
+- Save
+
 
 ### Django REST framework
 
